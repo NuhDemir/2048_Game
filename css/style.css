@@ -1,4 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import "../font/clear-sans.css";
+
+:root {
+    --background-color: #B5FED9;
+    --text-color: #474935;
+    --tile-color-2: #ede0c8;
+    --tile-color-4: #f2b179;
+    --tile-color-8: #f59563;
+    --tile-color-16: #f67c5f;
+    --tile-color-32: #f65e3b;
+    --tile-color-64: #edcf72;
+    --tile-color-128: #edcc61;
+    --tile-color-256: #edc850;
+    --tile-color-512: #edc53f;
+    --tile-color-1024: #edc22e;
+    --tile-color-2048: #edc22e;
+    --tile-shadow: rgba(243, 215, 116, 0.55556);
+    --container-width: 450px;
+    --container-height: 450px;
+    --tile-size: 23.5%;
+    --tile-font-size: 53px;
+    --large-tile-font-size: 45px;
+    --larger-tile-font-size: 33px;
+    --padding-small: 3px 20px;
+    --padding-medium: 0 8px;
+    --border-radius: 3px;
+    --background-light: rgba(238, 228, 218, 0.35);
+    --background-medium: #98CBB4;
+    --background-dark: #a1b382;
+    --winning-animation: 1.5s infinite;
+    --failure-animation: 5s infinite;
+}
 
 * {
     margin: 0;
@@ -6,14 +38,13 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    font-family: "Bebas Neue", sans-serif;   font-size: 400;
-    color: #474935;
+html, body {
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 18px;
-    background: #B5FED9;
-    overflow: hidden;
+    color: var(--text-color);
+    background: var(--background-color);
     height: 100%;
+    overflow: hidden;
 }
 
 a {
@@ -27,16 +58,12 @@ a {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    width: 450px;
+    width: var(--container-width);
     height: 100vh;
-    box-sizing: content-box;
 }
 
 .heading {
     margin: 20px 0;
-}
-
-.heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -56,9 +83,9 @@ h1.title {
 .score-container,
 .best-container {
     float: left;
-    padding: 3px 20px;
-    background: #a1b382;
-    border-radius: 3px;
+    padding: var(--padding-small);
+    background: var(--background-dark);
+    border-radius: var(--border-radius);
     font-size: 25px;
     font-weight: bold;
     color: white;
@@ -82,13 +109,10 @@ h1.title {
     left: 0;
     bottom: 0;
     width: 100%;
-    color: #98CBB4;
+    color: var(--background-medium);
     z-index: 100;
     opacity: 0;
     font-size: 1rem;
-}
-
-.score-addition.action {
     animation: 2s moveup;
 }
 
@@ -99,24 +123,24 @@ h1.title {
 .restart-btn {
     margin: 5px 0 0 5px;
     float: right;
-    padding: 0 8px;
-    background: #98CBB4;
+    padding: var(--padding-medium);
+    background: var(--background-medium);
     color: white;
     height: 40px;
     line-height: 40px;
-    border-radius: 3px;
+    border-radius: var(--border-radius);
     font-weight: bold;
 }
 
 h2.subtitle {
-    font-size: 1em;
+    font-size: 0.7em;
 }
 
 .game-container {
     position: relative;
     margin-top: 15px;
-    width: 450px;
-    height: 450px;
+    width: var(--container-width);
+    height: var(--container-height);
     background: #7BA098;
     border-radius: 6px;
     touch-action: none;
@@ -131,10 +155,9 @@ h2.subtitle {
     right: 0;
     bottom: 0;
     margin: auto;
-    width: 426px;
-    height: 426px;
+    width: calc(var(--container-width) - 24px);
+    height: calc(var(--container-height) - 24px);
 }
-
 
 .grid-row {
     display: flex;
@@ -143,18 +166,18 @@ h2.subtitle {
 
 .grid-row,
 .tile {
-    height: 23.5%;
+    height: var(--tile-size);
 }
 
 .grid-cell,
 .tile {
-    width: 23.5%;
-    border-radius: 3px;
+    width: var(--tile-size);
+    border-radius: var(--border-radius);
 }
 
 .grid-cell {
     margin-right: 2%;
-    background: rgba(238, 228, 218, 0.35);
+    background: var(--background-light);
 }
 
 .grid-cell:nth-of-type(4n) {
@@ -166,7 +189,7 @@ h2.subtitle {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 53px;
+    font-size: var(--tile-font-size);
     font-weight: bold;
     background: #eee4da;
     transition: all 0.15s ease;
@@ -184,65 +207,17 @@ h2.subtitle {
     color: #f9f6f2;
 }
 
-.tile[data-val="2"],
-.tile[data-val="4"] {
-    color: #776e65;
-}
-
-.tile[data-val="128"],
-.tile[data-val="256"],
-.tile[data-val="512"] {
-    font-size: 45px;
-}
-
-.tile[data-val="1024"],
-.tile[data-val="2048"] {
-    font-size: 33px;
-}
-
-.tile[data-val="4"] {
-    background: #ede0c8;
-}
-
-.tile[data-val="8"] {
-    background: #f2b179;
-}
-
-.tile[data-val="16"] {
-    background: #f59563;
-}
-
-.tile[data-val="32"] {
-    background: #f67c5f;
-}
-
-.tile[data-val="64"] {
-    background: #f65e3b;
-}
-
-.tile[data-val="128"] {
-    background: #edcf72;
-}
-
-.tile[data-val="256"] {
-    background: #edcc61;
-    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.31746), inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
-}
-
-.tile[data-val="512"] {
-    background: #edc850;
-    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.39683), inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
-}
-
-.tile[data-val="1024"] {
-    background: #edc53f;
-    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.47619), inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
-}
-
-.tile[data-val="2048"] {
-    background: #edc22e;
-    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.55556), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
-}
+.tile[data-val="2"] { background: var(--tile-color-2); color: #776e65; }
+.tile[data-val="4"] { background: var(--tile-color-4); color: #776e65; }
+.tile[data-val="8"] { background: var(--tile-color-8); }
+.tile[data-val="16"] { background: var(--tile-color-16); }
+.tile[data-val="32"] { background: var(--tile-color-32); }
+.tile[data-val="64"] { background: var(--tile-color-64); }
+.tile[data-val="128"] { background: var(--tile-color-128); font-size: var(--large-tile-font-size); }
+.tile[data-val="256"] { background: var(--tile-color-256); font-size: var(--large-tile-font-size); box-shadow: 0 0 30px 10px var(--tile-shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.19048); }
+.tile[data-val="512"] { background: var(--tile-color-512); font-size: var(--large-tile-font-size); box-shadow: 0 0 30px 10px var(--tile-shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.2381); }
+.tile[data-val="1024"] { background: var(--tile-color-1024); font-size: var(--larger-tile-font-size); box-shadow: 0 0 30px 10px var(--tile-shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.28571); }
+.tile[data-val="2048"] { background: var(--tile-color-2048); font-size: var(--larger-tile-font-size); box-shadow: 0 0 30px 10px var(--tile-shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.33333); }
 
 .pop-container {
     display: flex;
@@ -257,56 +232,6 @@ h2.subtitle {
     transition: all 1s ease;
 }
 
-.winning-container p:nth-child(1){
-    transform: rotate(90deg);
-}
-
-.winning-container.action p:nth-child(1){
-    transform-origin: center;
-    animation: winning 1.5s infinite;
-}
-
-.failure-container.action p:nth-child(1){
-    transform-origin: center;
-    animation: failure 5s infinite;
-}
-
-@keyframes winning{
-    0%,25%,50%,75%,100%{
-		transform: rotate(90deg) translateX(-5px);
-	}
-	12.5%{
-		transform: rotate(80deg);
-	}
-	37.5%{
-		transform: rotate(70deg);
-	}
-	62.5%{
-		transform: rotate(100deg);
-	}
-	87.5%{
-		transform: rotate(120deg);
-	}
-}
-
-@keyframes failure{
-    0%,25%,50%,75%,100%{
-		transform: rotate(90deg) scale(0.7,1) rotateX(40deg);
-	}
-	12.5%{
-		transform: rotate(90deg);
-	}
-	37.5%{
-		transform: rotate(90deg);
-	}
-	62.5%{
-		transform: rotate(90deg);
-	}
-	87.5%{
-		transform: rotate(90deg);
-	}
-}
-
 .pop-container.action {
     opacity: 1;
 }
@@ -314,4 +239,34 @@ h2.subtitle {
 .pop-container p {
     font-size: 60px;
     font-weight: bold;
+}
+
+.winning-container p:nth-child(1) {
+    transform: rotate(90deg);
+}
+
+.winning-container.action p:nth-child(1) {
+    transform-origin: center;
+    animation: winning var(--winning-animation);
+}
+
+.failure-container.action p:nth-child(1) {
+    transform-origin: center;
+    animation: failure var(--failure-animation);
+}
+
+@keyframes winning {
+    0%, 25%, 50%, 75%, 100% { transform: rotate(90deg) translateX(-5px); }
+    12.5% { transform: rotate(80deg); }
+    37.5% { transform: rotate(70deg); }
+    62.5% { transform: rotate(100deg); }
+    87.5% { transform: rotate(120deg); }
+}
+
+@keyframes failure {
+    0%, 25%, 50%, 75%, 100% { transform: rotate(90deg) scale(0.7, 1) rotateX(40deg); }
+    12.5% { transform: rotate(90deg); }
+    37.5% { transform: rotate(90deg); }
+    62.5% { transform: rotate(90deg); }
+    87.5% { transform: rotate(90deg); }
 }
