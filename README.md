@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/NuhDemir/2048_Game/main/img/2048.png">
+
 I'd be glad to craft a markdown document outlining potential enhancements for the provided 2048 game code, incorporating insights from best practices and addressing potential shortcomings:
 
 **Enhancing the 2048 Game: A Guide to Engaging Gameplay**
