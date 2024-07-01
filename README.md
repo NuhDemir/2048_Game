@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/NuhDemir/2048_Game/main/img/2048.png">
+<img src="https://raw.githubusercontent.com/NuhDemir/2048_Game/main/img/2048.png" weight="526px" height="430px">
 
 I'd be glad to craft a markdown document outlining potential enhancements for the provided 2048 game code, incorporating insights from best practices and addressing potential shortcomings:
 
